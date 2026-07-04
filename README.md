@@ -1,2 +1,3 @@
 # MeowMail-Digest
 A lightweight Gmail assistant that purrs through the inbox and summarizes what matters.
+还没写好，等我一会儿……
