@@ -1,0 +1,17 @@
+{
+  "source_file": "gmail_output.json",
+  "mode": "fallback_history_date",
+  "generated_at": "2026-01-01T00:00:00+00:00",
+  "original_count": 2,
+  "filtered_count": 1,
+  "removed_count": 1,
+  "messages": [
+    {
+      "id": "EXAMPLE_MESSAGE_ID",
+      "subject": "Example subject",
+      "from": "sender@example.com",
+      "date": "Thu, 01 Jan 2026 00:00:00 +0000",
+      "body": "Example email body."
+    }
+  ]
+}
