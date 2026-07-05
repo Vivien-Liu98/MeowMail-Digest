@@ -4,9 +4,14 @@
 
 学校邮箱每天收到大量邮件，不读担心错过重要信息，全读太浪费时间……那就让AI来帮忙总结邮件，提取真正重要的信息吧！此存储库中包含所有必需文件的参考模板。
 
-School email inboxes receive tons of messages every day. If you don’t read them, you might miss something important; if you read them all, it takes way too much time... Let AI help summarize emails and extract the truly important information! Reference templates for all required files are included in this repository.
+School email inboxes receive tons of messages every day. If you don’t read them, you might miss something important; if you read them all, it takes way too much time... Let AI help summarize emails and extract the truly important information! Reference templates for all required files are included in this repository. **The English version is below.**
 
-<u>The English version is below. </u>
+> [!WARNING]
+> 此程序涉及API密钥和邮箱授权凭证。使用、部署或分享此项目时，请务必妥善保护相关敏感信息。
+> 
+> This program involves API keys and email authorization credentials. Please protect sensitive information carefully when using, deploying, or sharing this project.
+
+
 
 ### 前期准备
 
@@ -63,8 +68,6 @@ A：可以喵，只要兼容OpenAI Chat Completions 接口格式，修改`api.tx
 **Q：可以在服务器（linux)上用吗？**
 
 A：大概……可以喵？没有测试过的说。初次获取token需要在浏览器登录邮箱账号，建议windows系统授权，之后把`token.json`传到服务器即可。~~如果已经在win装了python用来运行`token_get.py`，为什么不继续在win走完后面的流程喵……~~
-
-
 
 =================================================================
 
