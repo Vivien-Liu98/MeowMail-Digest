@@ -13,7 +13,7 @@ School email inboxes receive tons of messages every day. If you don’t read the
 
 
 
-### 前期准备
+## 前期准备
 
 1. 在学校邮箱设置自动转发/重定向至gmail。不直接从学校邮箱获取邮件，是考虑到学校管理员通常不会给学生邮箱授权。
 
@@ -25,9 +25,9 @@ School email inboxes receive tons of messages every day. If you don’t read the
 
 5. 根据你的需求，调整`prompt.txt`和`send2ds.py`末尾的提示词。
 
-6. 由于脚本逻辑限制，在开始前，确保gmail收件箱至少有一封未读邮件。~~没有的话，你可以给自己发一封。~~
+6. 由于脚本逻辑限制，在开始前，请确保gmail收件箱至少有一封未读邮件。~~没有的话，你可以给自己发一封。~~
 
-### 获取授权
+## 获取授权
 
 1. 首先，从Google官方获取授权。进入[Google API Console](https://console.developers.google.com/)，在APIs & Services中找到并启用Gmail api，所需权限为`/auth/gmail.readonly`。
 
@@ -39,7 +39,7 @@ School email inboxes receive tons of messages every day. If you don’t read the
 
 5. 如测试提示需要魔法，学会魔法后，将系统代理服务地址写入`proxy.txt`。如无需魔法，则将参考服务地址注释掉或直接删除该文件。
 
-### 运行程序
+## 运行程序
 
 1. 运行`run.py`，该统括脚本会自动检测所需文件是否完整，并运行以下3个脚本：
 - `gmail_fetch.py`：从gmail获取未读邮件，生成包含邮件内容的`gmail_output.json`和记录获取历史的`gmail_history.json`。该脚本逻辑为，优先获取未读邮件，当所有未读邮件已经被获取过（历史记录），则获取所有**今天**的邮件。
@@ -55,7 +55,7 @@ School email inboxes receive tons of messages every day. If you don’t read the
 py tool_split.py -n 2 gmail_filtered.json   # -n 拆分的文件数
 ```
 
-### 问答
+## 问答
 
 **Q：Gmail可以换成别的邮箱吗？**
 
