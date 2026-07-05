@@ -105,19 +105,79 @@ def get_credentials():
 def test_gmail_access(creds):
     """
     简单测试 Gmail API 是否可用。
+    如果无法连接 Google API，则提示网络有问题或需要代理。
     """
+    import socket
+    import ssl
     from googleapiclient.discovery import build
+    from googleapiclient.errors import HttpError
+    from google.auth.exceptions import TransportError, RefreshError
 
     print("正在测试 Gmail API 访问权限...")
 
-    service = build("gmail", "v1", credentials=creds)
+    try:
+        service = build(
+            "gmail",
+            "v1",
+            credentials=creds,
+            cache_discovery=False
+        )
 
-    profile = service.users().getProfile(userId="me").execute()
+        profile = service.users().getProfile(userId="me").execute()
 
-    print("Gmail API 访问成功。")
-    print("当前邮箱：", profile.get("emailAddress"))
-    print("总邮件数：", profile.get("messagesTotal"))
-    print("总会话数：", profile.get("threadsTotal"))
+        print("Gmail API 访问成功。")
+        print("当前邮箱：", profile.get("emailAddress"))
+        print("总邮件数：", profile.get("messagesTotal"))
+        print("总会话数：", profile.get("threadsTotal"))
+
+        return True
+
+    except HttpError as e:
+        status_code = getattr(e.resp, "status", None)
+
+        print("Gmail API 请求失败。")
+
+        if status_code in (401, 403):
+            print("可能原因：token 无效、权限不足，或 Gmail API 未启用。")
+            print("建议：删除 token.json 后重新运行脚本授权。")
+        elif status_code in (429, 500, 502, 503, 504):
+            print("可能原因：Google API 暂时不可用，或网络访问不稳定。")
+            print("建议：稍后重试，或检查代理设置。")
+        else:
+            print(f"HTTP 状态码：{status_code}")
+
+        print("详细错误：")
+        print(e)
+
+        return False
+
+    except (
+        TransportError,
+        RefreshError,
+        socket.timeout,
+        TimeoutError,
+        ConnectionError,
+        ConnectionResetError,
+        ConnectionRefusedError,
+        ssl.SSLError,
+        OSError,
+    ) as e:
+        print("无法连接 Gmail API。")
+        print("可能原因：网络有问题，或需要魔（代）法（理）。")
+        print("建议：是时候变身魔法少女了喵（）")
+        print("详细错误：")
+        print(repr(e))
+
+        return False
+
+    except Exception as e:
+        print("测试 Gmail API 时发生未知错误。")
+        print("可能原因：不知道喵...")
+        print()
+        print("详细错误：")
+        print(repr(e))
+
+        return False
 
 
 def main():
@@ -127,11 +187,13 @@ def main():
 
     creds = get_credentials()
 
-    test_gmail_access(creds)
+    if not test_gmail_access(creds):
+        print()
+        print("Gmail API 连接测试未通过。")
+        sys.exit(1)
 
     print()
-    print("全部完成。")
-    print(f"你现在可以在其他脚本中使用这个 token 文件：{TOKEN_FILE}")
+    print("获取token完成。")
 
 
 if __name__ == "__main__":
